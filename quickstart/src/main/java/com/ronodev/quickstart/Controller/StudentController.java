@@ -1,5 +1,6 @@
 package com.ronodev.quickstart.Controller;
 
+import com.ronodev.quickstart.Model.Student;
 import com.ronodev.quickstart.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

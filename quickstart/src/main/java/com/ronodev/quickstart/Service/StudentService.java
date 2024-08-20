@@ -1,6 +1,6 @@
 package com.ronodev.quickstart.Service;
 
-import com.ronodev.quickstart.Controller.Student;
+import com.ronodev.quickstart.Model.Student;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

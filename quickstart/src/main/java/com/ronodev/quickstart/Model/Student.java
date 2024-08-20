@@ -1,8 +1,18 @@
-package com.ronodev.quickstart.Controller;
+package com.ronodev.quickstart.Model;
+
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+
+@Entity
+@Table
 public class Student {
+    @Id
+    @SequenceGenerator
+            (name = "student_sequence", sequenceName = "student_sequence",allocationSize = 1)
+
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "student_sequence")
 
     public long id;
     private String name;
@@ -10,11 +20,11 @@ public class Student {
     private LocalDate dob;
     private Integer age;
 
-    public Student(String email, LocalDate dob, Integer age) {
-        this.email = email;
-        this.dob = dob;
-        this.age = age;
-        this.name = name;
+    public Student() {
+
+    }
+
+    public Student(String mail, LocalDate of, int i) {
     }
 
     public Integer getAge() {
