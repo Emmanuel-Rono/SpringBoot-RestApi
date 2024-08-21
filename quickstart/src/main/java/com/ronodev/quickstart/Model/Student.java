@@ -24,8 +24,15 @@ public class Student {
 
     }
 
-    public Student(String mail, LocalDate of, int i) {
+
+
+    public Student(String name, String email, LocalDate dob, Integer age) {
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.age = age;
     }
+
 
     public Integer getAge() {
         return age;
