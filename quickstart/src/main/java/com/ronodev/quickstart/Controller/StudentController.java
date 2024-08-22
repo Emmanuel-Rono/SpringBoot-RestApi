@@ -25,18 +25,40 @@ public class StudentController {
 
 
     @GetMapping
-    //function to h=ge the HTTP rEQUEST
+    //function to ge the HTTP rEQUEST
     public List<Student> getStudents()
     {
         return studentService.getStudents();
     }
 
+
     @PostMapping
     public ResponseEntity<String> RegisterNewStudent(@RequestBody Student student)
     {
-        studentService.addNewStudent(student);
+       try {
+           studentService.addNewStudent(student);
         return new ResponseEntity<>("Student created successfully", HttpStatus.CREATED);
-
     }
+    catch (IllegalStateException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+}
+}
+
+@DeleteMapping(path= "{studentId}")
+public ResponseEntity<String> DeleteStudent(@PathVariable("studentId") Long studentId)
+{
+    try
+    {
+    studentService.DeleteStudentSelected(studentId);
+    return new ResponseEntity<>("", HttpStatus.CREATED);
+
+}
+    catch(IllegalStateException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+}
+
 
 }
