@@ -61,4 +61,17 @@ public ResponseEntity<String> DeleteStudent(@PathVariable("studentId") Long stud
 }
 
 
+    //PUT Request
+
+    @PutMapping(path= "{studentId}")
+    public void updateStudent(
+            @PathVariable("studentId") Long studentId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email)
+    {
+
+        studentService.updatatheStudent(studentId,name,email);
+
+    }
+
 }

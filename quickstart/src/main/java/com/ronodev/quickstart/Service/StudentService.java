@@ -2,10 +2,16 @@ package com.ronodev.quickstart.Service;
 
 import com.ronodev.quickstart.Model.Student;
 import com.ronodev.quickstart.Repository.StudentRepository;
+import jakarta.transaction.Transactional;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -24,6 +30,7 @@ public class StudentService {
         return studentRepository.findAll();
 
     }
+
 
     public void addNewStudent(Student student)
     {
@@ -56,4 +63,30 @@ public class StudentService {
 
     }
 
+
+    @Transactional
+    public void updatatheStudent(Long studentId,String name, String email) {
+
+        Student student=studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalStateException("Student with Id: " + studentId + "do not exist"));
+        if(name != null && !name.isEmpty() && !Objects.equals(student.getEmail(),name)) {
+            student.setName(name);
+
+        }
+        if(email != null && !email.isEmpty() && !Objects.equals(student.getEmail(),email)) {
+            Optional<Student> studentOptional=studentRepository.findStudentByEmail(email);
+            if(studentOptional.isPresent())
+            {
+                throw new IllegalStateException("Email Taken");
+            }
+
+            student.setEmail(email);
+
+        }
+    }
+
+
 }
+
+
+
